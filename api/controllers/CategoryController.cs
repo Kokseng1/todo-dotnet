@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace api.controllers
 {
-    [Route("apli/Category")]
+    [Route("api/Category")]
     [ApiController]
     public class CategoryController : ControllerBase
     {

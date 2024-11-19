@@ -48,7 +48,14 @@ namespace api.Repository
             if (!string.IsNullOrWhiteSpace(queryObject.UserTaskName)) {
                 userTasks = userTasks.Where(t => t.name.Contains(queryObject.UserTaskName));
             }
-            return userTasks.ToListAsync();
+
+            if (!string.IsNullOrWhiteSpace(queryObject.SortBy)) {
+                    userTasks = queryObject.SortBy.Equals("name") ? userTasks.OrderByDescending(t => t.name) :  userTasks.OrderByDescending(t => t.CreatedOn);
+            }
+
+            var skipNumber = (queryObject.PageNumber - 1) * queryObject.PageSize;
+
+            return userTasks.Skip(skipNumber).Take(queryObject.PageSize).ToListAsync();
         }
     
 
