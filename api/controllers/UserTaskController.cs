@@ -8,6 +8,7 @@ using api.Helpers;
 using api.Interfaces;
 using api.Mappers;
 using api.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -28,6 +29,7 @@ namespace api.controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> GetAll([FromQuery] QueryObject queryObject)
         {
             var userTasks = await _userTaskRepository.GetAllAsync(queryObject);
@@ -36,6 +38,7 @@ namespace api.controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<IActionResult> GetById([FromRoute] int id)
         {
             var userTask = await _userTaskRepository.GetByIdAsync(id);
@@ -49,6 +52,7 @@ namespace api.controllers
         }
 
         [HttpPost("{categoryId}")]
+        [Authorize]
         public async Task<IActionResult> Create([FromRoute] int categoryId, [FromBody] CreateUserTaskRequestDto createUserTaskDto) {
             if (!ModelState.IsValid) {
                 return BadRequest(ModelState);
@@ -63,6 +67,7 @@ namespace api.controllers
 
         [HttpPut]
         [Route("{id}")]
+        [Authorize]
         public async Task<IActionResult> Update([FromRoute] int id, [FromBody] UpdateUserTaskDto updateUserTaskDto) {
             if (!ModelState.IsValid) {
                 return BadRequest(ModelState);
@@ -76,6 +81,7 @@ namespace api.controllers
 
         [HttpDelete]
         [Route("{id}")]
+        [Authorize]
         public async Task<IActionResult> Delete([FromRoute] int id) {
             var userTask = await _userTaskRepository.DeleteAsync(id);
 
