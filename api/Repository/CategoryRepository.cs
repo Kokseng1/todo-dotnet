@@ -18,7 +18,8 @@ namespace api.Repository
         }
         public Task<List<Category>> GetAllAsync()
         {
-            return _context.Categories.ToListAsync();
+            // Console.WriteLine(_context.Categories.Include(c => c.Tasks).ToListAsync());
+            return _context.Categories.Include(c => c.Tasks).ToListAsync();
         }
 
         public async Task<Category?> GetByIdAsync(int id) {
@@ -55,7 +56,7 @@ namespace api.Repository
                     return null;
                 }
 
-            existingCategory.name = updateCategoryDto.name;
+            existingCategory.Name = updateCategoryDto.name;
             await _context.SaveChangesAsync();
 
             return existingCategory;

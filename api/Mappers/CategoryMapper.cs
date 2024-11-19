@@ -11,14 +11,15 @@ namespace api.Mappers
     {
           public static CategoryDto ToCategoryDto(this Category category) {
             return new CategoryDto {
-                name = category.name,
+                name = category.Name,
+                Tasks = category.Tasks.Select(t => t.ToUserTaskDto()).ToList()
             };
         }
 
         public static Category ToCategoryFromRequestDto(this CreateCategoryDto createCategoryDto)
         {
             return new Category {
-                name = createCategoryDto.name
+                Name = createCategoryDto.name
             };
         }
     }

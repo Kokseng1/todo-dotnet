@@ -11,6 +11,12 @@ builder.Services.AddOpenApi();
 builder.Services.AddScoped<UserTaskRepositoryInterface, UserTaskRepository>();
 builder.Services.AddScoped<CategoryRepositoryInterface, CategoryRepository>();
 
+builder.Services.AddControllers().AddNewtonsoftJson(options =>
+{
+    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+});
+
+
 builder.Services.AddDbContext<ApplicationDBContext>(options => {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });

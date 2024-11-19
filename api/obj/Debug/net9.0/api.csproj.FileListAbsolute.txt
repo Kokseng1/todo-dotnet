@@ -9,6 +9,8 @@ C:\Users\ngkok\todo-dotnet\api\bin\Debug\net9.0\api.pdb
 C:\Users\ngkok\todo-dotnet\api\bin\Debug\net9.0\Azure.Core.dll
 C:\Users\ngkok\todo-dotnet\api\bin\Debug\net9.0\Azure.Identity.dll
 C:\Users\ngkok\todo-dotnet\api\bin\Debug\net9.0\Humanizer.dll
+C:\Users\ngkok\todo-dotnet\api\bin\Debug\net9.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\ngkok\todo-dotnet\api\bin\Debug\net9.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 C:\Users\ngkok\todo-dotnet\api\bin\Debug\net9.0\Microsoft.AspNetCore.OpenApi.dll
 C:\Users\ngkok\todo-dotnet\api\bin\Debug\net9.0\Microsoft.Bcl.AsyncInterfaces.dll
 C:\Users\ngkok\todo-dotnet\api\bin\Debug\net9.0\Microsoft.Build.Locator.dll
@@ -37,6 +39,8 @@ C:\Users\ngkok\todo-dotnet\api\bin\Debug\net9.0\Microsoft.OpenApi.dll
 C:\Users\ngkok\todo-dotnet\api\bin\Debug\net9.0\Microsoft.SqlServer.Server.dll
 C:\Users\ngkok\todo-dotnet\api\bin\Debug\net9.0\Microsoft.Win32.SystemEvents.dll
 C:\Users\ngkok\todo-dotnet\api\bin\Debug\net9.0\Mono.TextTemplating.dll
+C:\Users\ngkok\todo-dotnet\api\bin\Debug\net9.0\Newtonsoft.Json.dll
+C:\Users\ngkok\todo-dotnet\api\bin\Debug\net9.0\Newtonsoft.Json.Bson.dll
 C:\Users\ngkok\todo-dotnet\api\bin\Debug\net9.0\Swashbuckle.AspNetCore.Swagger.dll
 C:\Users\ngkok\todo-dotnet\api\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Users\ngkok\todo-dotnet\api\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerUI.dll
