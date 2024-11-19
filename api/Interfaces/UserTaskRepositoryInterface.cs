@@ -9,7 +9,7 @@ namespace api.Interfaces
 {
     public interface UserTaskRepositoryInterface
     {
-        // Task<List<UserTask>> GetAllAsync(QueryObject query);
+        Task<List<UserTask>> GetAllAsync();
         Task<UserTask?> GetByIdAsync(int id);
         Task<UserTask?> GetByStatusAsync(bool status);
         Task<UserTask> CreateAsync(UserTask UserTaskModel);

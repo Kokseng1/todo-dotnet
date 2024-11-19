@@ -96,7 +96,6 @@ namespace api.Repository
                     return null;
                 }
 
-            existingUserTask.Category = UserTaskDto.category;
             existingUserTask.CategoryId = UserTaskDto.CategoryId;
             existingUserTask.name = UserTaskDto.name;
             existingUserTask.status = UserTaskDto.status;

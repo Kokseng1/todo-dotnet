@@ -13,7 +13,6 @@ namespace api.Mappers
             return new UserTaskDto {
                 Id = userTask.Id,
                 CategoryId = userTask.CategoryId,
-                category = userTask.Category,
                 name = userTask.name,
                 status = userTask.status
             };
@@ -23,7 +22,6 @@ namespace api.Mappers
         {
             return new UserTask {
                 CategoryId = createUserTaskRequestDto.CategoryId,
-                Category = createUserTaskRequestDto.category,
                 name = createUserTaskRequestDto.name,
                 status = createUserTaskRequestDto.status
             };

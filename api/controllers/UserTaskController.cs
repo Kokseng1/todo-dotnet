@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using api.Data;
 using api.Dto.UserTask;
+using api.Interfaces;
 using api.Mappers;
 using api.Repository;
 using Microsoft.AspNetCore.Mvc;
@@ -16,8 +17,8 @@ namespace api.controllers
     public class UserTaskController : ControllerBase
     {
         private readonly ApplicationDBContext _context;
-        private readonly UserTaskRepository _userTaskRepository;
-        public UserTaskController(ApplicationDBContext context, UserTaskRepository userTaskRepository)
+        private readonly UserTaskRepositoryInterface _userTaskRepository;
+        public UserTaskController(ApplicationDBContext context, UserTaskRepositoryInterface userTaskRepository)
         {
             _context = context;
             _userTaskRepository = userTaskRepository;
