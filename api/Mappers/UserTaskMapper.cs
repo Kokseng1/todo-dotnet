@@ -18,10 +18,10 @@ namespace api.Mappers
             };
         }
 
-        public static UserTask ToUserTaskFromRequestDto(this CreateUserTaskRequestDto createUserTaskRequestDto)
+        public static UserTask ToUserTaskFromRequestDto(this CreateUserTaskRequestDto createUserTaskRequestDto, int categoryId)
         {
             return new UserTask {
-                CategoryId = createUserTaskRequestDto.CategoryId,
+                CategoryId = categoryId,
                 name = createUserTaskRequestDto.name,
                 status = createUserTaskRequestDto.status
             };

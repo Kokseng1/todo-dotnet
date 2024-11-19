@@ -18,7 +18,6 @@ namespace api.Repository
         }
         public Task<List<Category>> GetAllAsync()
         {
-            // Console.WriteLine(_context.Categories.Include(c => c.Tasks).ToListAsync());
             return _context.Categories.Include(c => c.Tasks).ToListAsync();
         }
 

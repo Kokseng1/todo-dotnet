@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using api.Dto.UserTask;
+using api.Helpers;
 using api.Models;
 
 namespace api.Interfaces
 {
     public interface UserTaskRepositoryInterface
     {
-        Task<List<UserTask>> GetAllAsync();
+        Task<List<UserTask>> GetAllAsync(QueryObject queryObject);
         Task<UserTask?> GetByIdAsync(int id);
         Task<UserTask?> GetByStatusAsync(bool status);
         Task<UserTask> CreateAsync(UserTask UserTaskModel);

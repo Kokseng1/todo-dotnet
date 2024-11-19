@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using api.Data;
 using api.Dto.UserTask;
+using api.Helpers;
 using api.Interfaces;
 using api.Mappers;
 using api.Models;
@@ -41,34 +42,13 @@ namespace api.Repository
             return UserTaskModel;
         }
 
-        public Task<List<UserTask>> GetAllAsync()
+        public Task<List<UserTask>> GetAllAsync(QueryObject queryObject)
         {
-            // var UserTasks = _context.UserTasks.Include(t => t.Comments).ThenInclude(a => a.AppUser).AsQueryable();
-
-            // if (!string.IsNullOrWhiteSpace(query.CompanyName))
-            // {
-            //     UserTasks = UserTasks.Where(s => s.CompanyName.Contains(query.CompanyName));
-            // }
-
-            // if (!string.IsNullOrWhiteSpace(query.Symbol))
-            // {
-            //     UserTasks = UserTasks.Where(s => s.Symbol.Contains(query.Symbol));
-            // }
-
-            // if (!string.IsNullOrWhiteSpace(query.SortBy))
-            // {
-            //     if (query.SortBy.Equals("Symbol", StringComparison.OrdinalIgnoreCase))
-            //     {
-            //         UserTasks = query.IsDecsending ? UserTasks.OrderByDescending(s => s.Symbol) : UserTasks.OrderBy(s => s.Symbol);
-            //     }
-            // }
-
-            // var skipNumber = (query.PageNumber - 1) * query.PageSize;
-
-
-            // return await UserTasks.Skip(skipNumber).Take(query.PageSize).ToListAsync();
-
-            return _context.UserTasks.ToListAsync();
+            var userTasks = _context.UserTasks.Include(t => t.Category).AsQueryable();
+            if (!string.IsNullOrWhiteSpace(queryObject.UserTaskName)) {
+                userTasks = userTasks.Where(t => t.name.Contains(queryObject.UserTaskName));
+            }
+            return userTasks.ToListAsync();
         }
     
 

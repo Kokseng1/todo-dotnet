@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using api.Data;
 using api.Dto.UserTask;
+using api.Helpers;
 using api.Interfaces;
 using api.Mappers;
 using api.Repository;
@@ -18,16 +19,18 @@ namespace api.controllers
     {
         private readonly ApplicationDBContext _context;
         private readonly UserTaskRepositoryInterface _userTaskRepository;
-        public UserTaskController(ApplicationDBContext context, UserTaskRepositoryInterface userTaskRepository)
+        private readonly CategoryRepositoryInterface _categoryRepositoryInterface;
+        public UserTaskController(ApplicationDBContext context, UserTaskRepositoryInterface userTaskRepository, CategoryRepositoryInterface categoryRepositoryInterface)
         {
+            _categoryRepositoryInterface = categoryRepositoryInterface;
             _context = context;
             _userTaskRepository = userTaskRepository;
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll([FromQuery] QueryObject queryObject)
         {
-            var userTasks = await _userTaskRepository.GetAllAsync();
+            var userTasks = await _userTaskRepository.GetAllAsync(queryObject);
             var userTaskDto = userTasks.Select(task => task.ToUserTaskDto());
             return Ok(userTaskDto);
         }
@@ -45,9 +48,15 @@ namespace api.controllers
             return Ok(userTask.ToUserTaskDto());
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Create([FromBody] CreateUserTaskRequestDto createUserTaskDto) {
-            var userTask = createUserTaskDto.ToUserTaskFromRequestDto();
+        [HttpPost("{categoryId}")]
+        public async Task<IActionResult> Create([FromRoute] int categoryId, [FromBody] CreateUserTaskRequestDto createUserTaskDto) {
+            if (!ModelState.IsValid) {
+                return BadRequest(ModelState);
+            }
+            if (!await _categoryRepositoryInterface.CategoryExists(categoryId)) {
+                return BadRequest("Category doees not exist");
+            }
+            var userTask = createUserTaskDto.ToUserTaskFromRequestDto(categoryId);
             await _userTaskRepository.CreateAsync(userTask);
             return CreatedAtAction(nameof(GetById), new { id = userTask.Id }, userTask.ToUserTaskDto());
         }
@@ -55,6 +64,9 @@ namespace api.controllers
         [HttpPut]
         [Route("{id}")]
         public async Task<IActionResult> Update([FromRoute] int id, [FromBody] UpdateUserTaskDto updateUserTaskDto) {
+            if (!ModelState.IsValid) {
+                return BadRequest(ModelState);
+            }
             var userTask = await _userTaskRepository.UpdateAsync(id, updateUserTaskDto); 
             if (userTask == null) {
                 return NotFound();

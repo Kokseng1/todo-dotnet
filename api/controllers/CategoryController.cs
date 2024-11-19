@@ -43,6 +43,9 @@ namespace api.controllers
 
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateCategoryDto createCategoryDto) {
+            if (!ModelState.IsValid) {
+                return BadRequest(ModelState);
+            }
             var category = createCategoryDto.ToCategoryFromRequestDto();
             await _categoryReporitory.CreateAsync(category);
             return CreatedAtAction(nameof(GetById), new { id = category.Id }, category.ToCategoryDto());
@@ -51,6 +54,9 @@ namespace api.controllers
         [HttpPut]
         [Route("{id}")]
         public async Task<IActionResult> Update([FromRoute] int id, [FromBody] UpdateCategoryDto UudateCategoryDto) {
+            if (!ModelState.IsValid) {
+                return BadRequest(ModelState);
+            }
             var category = await _categoryReporitory.UpdateAsync(id, UudateCategoryDto); 
             if (category == null) {
                 return NotFound();
