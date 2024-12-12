@@ -38,11 +38,9 @@ export class TaskListComponent {
   }
 
   toggleTaskStatus(task: any): void {
-    this.taskService
-      .updateTaskStatus(task.id, task.status)
-      .subscribe((data) => {
-        this.getTasks();
-      });
+    this.taskService.updateTaskStatus(task).subscribe((data) => {
+      this.getTasks();
+    });
   }
 
   delete(task: any): void {

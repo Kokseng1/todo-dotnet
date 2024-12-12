@@ -2,6 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
+export interface Task {
+  id: number;
+  name: string;
+  categoryId: number;
+  status: boolean;
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -14,8 +21,8 @@ export class TaskService {
     return this.http.get(`${this.apiURL}`);
   }
 
-  updateTaskStatus(taskId: number, status: boolean): Observable<any> {
-    return this.http.put(`${this.apiURL}/${taskId}`, { status });
+  updateTaskStatus(task: Task): Observable<any> {
+    return this.http.put(`${this.apiURL}/${task.id}`, task);
   }
 
   deleteTask(id: any) {
