@@ -1,0 +1,68 @@
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.taskList {
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+button {
+  padding: 10px 20px;
+  margin-right: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.task-header {
+  font-weight: bold;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+.taskList-item {
+  margin: 20px;
+  border: 1px solid #ccc;
+  border-radius: 25px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+}
+
+.taskList-item td {
+  border-radius: 15px; /* Apply border-radius to the td elements for rounded corners */
+}
+
+.taskList-item {
+  border: 1px solid #ccc;
+}
+
+.task-content,
+.task-actions {
+  padding: 10px;
+}
+
+.task-header,
+.taskList-item {
+  text-align: center;
+  padding: 8px;
+}

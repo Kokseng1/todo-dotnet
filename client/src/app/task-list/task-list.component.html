@@ -1,0 +1,49 @@
+<div class="container">
+  <app-logout-button />
+  <div *ngIf="isLoading">Loading tasks...</div>
+  <div *ngIf="!isLoading">
+    <div *ngIf="tasks.length === 0">
+      <p>No tasks available.</p>
+    </div>
+    <table *ngIf="tasks.length !== 0">
+      <tr class="task-header">
+        <th class="task-header-item">Task</th>
+        <th class="task-header-item">Status</th>
+        <th class="task-header-item">Action</th>
+      </tr>
+
+      <!-- <ul> -->
+      <tr class="taskList-item" *ngFor="let task of tasks">
+        <td class="task-content">
+          <p class="task-name">{{ task.name }}</p>
+        </td>
+
+        <td class="task-actions">
+          <input
+            type="checkbox"
+            [(ngModel)]="task.status"
+            (change)="toggleTaskStatus(task)"
+            class="task-checkbox"
+          />
+        </td>
+
+        <td class="task-actions">
+          <button *ngIf="confirmDelete == task.id" (click)="delete(task)">
+            confirm delete
+          </button>
+          <button *ngIf="confirmDelete == task.id" (click)="cancelDelete()">
+            cancel
+          </button>
+          <button *ngIf="confirmDelete != task.id" (click)="delete(task)">
+            delete
+          </button>
+        </td>
+      </tr>
+      <!-- </ul> -->
+    </table>
+  </div>
+
+  <app-create-task-button
+    (sendTasksToParent)="updateTasksFromChild($event)"
+  ></app-create-task-button>
+</div>
