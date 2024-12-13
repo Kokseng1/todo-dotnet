@@ -11,27 +11,35 @@ name: "cat 8"
 ​
 status: false -->
 
-<!-- <form (ngSubmit)="login()">
-    <div class="inputfield">
-      <label for="username">Username:</label>
-      <input
-        type="text"
-        id="username"
-        [(ngModel)]="username"
-        name="username"
-        required
-      />
-    </div>
-    <div class="inputfield">
-      <label for="password">Password:</label>
-      <input
-        type="password"
-        id="password"
-        [(ngModel)]="password"
-        name="password"
-        required
-      />
-    </div>
-    <button type="submit">Login</button>
-    <button type="button" (click)="register()">Register</button>
-  </form> -->
+<form (ngSubmit)="submitEdit()">
+  <div class="inputfield">
+    <label for="taskName">task name:</label>
+    <input
+      type="taskName"
+      id="taskName"
+      [(ngModel)]="task.name"
+      name="taskName"
+      required
+    />
+  </div>
+  <div class="searchable-combobox">
+    <!-- Input for search and selection -->
+    <input
+      name="optionName"
+      type="text"
+      [(ngModel)]="categoryPickedName"
+      (input)="onSearch(categoryPickedName)"
+      placeholder="Select or search category"
+      list="category-list"
+    />
+
+    <!-- Data list for dropdown options -->
+    <datalist id="category-list">
+      <option
+        *ngFor="let category of categoryNames"
+        [value]="category"
+      ></option>
+    </datalist>
+  </div>
+  <button type="submit">Edit</button>
+</form>

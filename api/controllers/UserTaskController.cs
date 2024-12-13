@@ -93,6 +93,7 @@ namespace api.controllers
         [Route("{id}")]
         [Authorize]
         public async Task<IActionResult> Update([FromRoute] int id, [FromBody] UpdateUserTaskDto updateUserTaskDto) {
+            // Console.WriteLine("printing catname from endpoint : " + updateUserTaskDto.categoryName);
             if (!ModelState.IsValid) {
                 return BadRequest(ModelState);
             }

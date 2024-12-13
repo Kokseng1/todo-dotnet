@@ -14,9 +14,11 @@ namespace api.Repository
 {
     public class UserTaskRepository : UserTaskRepositoryInterface
     {
-        private readonly ApplicationDBContext _context;
-        public UserTaskRepository(ApplicationDBContext context)
+        private readonly ApplicationDBContext _context;  
+        private readonly CategoryRepositoryInterface _categoryRepositoryInterface;
+        public UserTaskRepository(ApplicationDBContext context, CategoryRepositoryInterface categoryRepositoryInterface)
         {
+            _categoryRepositoryInterface = categoryRepositoryInterface;
             _context = context;
         }
 
@@ -83,7 +85,14 @@ namespace api.Repository
                     return null;
                 }
 
+            if (UserTaskDto.CategoryId == null) {
+                // Console.WriteLine("in cat id null " + UserTaskDto.categoryName);
+                var category =  await _categoryRepositoryInterface.GetByNameAsync(UserTaskDto.categoryName);
+                UserTaskDto.CategoryId = category.Id;
+            }
+
             existingUserTask.CategoryId = UserTaskDto.CategoryId;
+            // Console.WriteLine("after setting cat id " + existingUserTask.CategoryId);
             existingUserTask.name = UserTaskDto.name;
             existingUserTask.status = UserTaskDto.status;
             await _context.SaveChangesAsync();

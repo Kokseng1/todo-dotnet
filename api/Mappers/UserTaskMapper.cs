@@ -18,7 +18,8 @@ namespace api.Mappers
                 CategoryId = userTask.CategoryId,
                 name = userTask.name,
                 status = userTask.status,
-                categoryName = userTask.Category.Name
+                categoryName = userTask.Category?.Name ?? "invalid cat"
+
             };
         }
 

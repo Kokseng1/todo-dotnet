@@ -15,5 +15,7 @@ namespace api.Dto.UserTask
         public int? CategoryId {get; set;}
         [Required]
         public Boolean status {get; set;} = false;
+
+        public string? categoryName {get; set;}
     }
 }

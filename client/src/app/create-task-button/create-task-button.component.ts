@@ -20,6 +20,7 @@ export class CreateTaskButtonComponent {
   showPanel: boolean = false;
   newTaskName: string = '';
   categoryPickedName: string = '';
+  categoryPickedId: number = 0;
 
   constructor(private taskService: TaskService) {}
 

@@ -5,8 +5,9 @@ import { Observable, of } from 'rxjs';
 export interface Task {
   id: number;
   name: string;
-  categoryId: number;
+  categoryId?: number;
   status: boolean;
+  categoryName?: string;
 }
 
 @Injectable({

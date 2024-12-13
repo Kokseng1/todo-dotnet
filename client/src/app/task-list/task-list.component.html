@@ -52,7 +52,11 @@
       <!-- </ul> -->
     </table>
   </div>
-  <app-edit-task *ngIf="showEdit" [task]="editingTask"></app-edit-task>
+  <app-edit-task
+    *ngIf="showEdit"
+    [task]="editingTask"
+    [categories]="categories"
+  ></app-edit-task>
   <app-create-task-button
     [categories]="categories"
     (sendTasksToParent)="updateTasksFromChild($event)"
