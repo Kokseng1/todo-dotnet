@@ -14,6 +14,7 @@ namespace api.Dto.UserTask
         [MinLength(1, ErrorMessage = "name cannot be empty") ]
         public string name {get; set;} = string.Empty;
         public int? CategoryId {get; set;}
+        public string? categoryName {get; set;}
         public DateTime CreatedOn {get; set;} = DateTime.Now;
         [Required]
         public Boolean status {get; set;} = false;

@@ -42,13 +42,36 @@ namespace api.controllers
         public async Task<IActionResult> GetById([FromRoute] int id)
         {
             var userTask = await _userTaskRepository.GetByIdAsync(id);
-
+            // var userTask = await _context.UserTasks
+                // .Include(ut => ut.Category) // Eagerly load Category
+                // .FirstOrDefaultAsync(ut => ut.Id == id);
+            // Console.WriteLine("in here");
+            // Console.WriteLine(userTask);
+            // Console.WriteLine(userTask.Category.Name);
             if(userTask == null)
             {
                 return NotFound(); //a type of Iaactionresult
             }
 
             return Ok(userTask.ToUserTaskDto());
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> CreateTaskUsingCategoryName([FromBody] CreateUserTaskRequestDto createUserTaskDto) {
+            if (!ModelState.IsValid) {
+                return BadRequest(ModelState);
+            }
+            
+            var category = await _categoryRepositoryInterface.GetByNameAsync(createUserTaskDto.categoryName);
+            if (category == null) {
+                return BadRequest("invalid category name");
+            }
+            var categoryId = category.Id;
+     
+            var userTask = createUserTaskDto.ToUserTaskFromRequestDto(categoryId);
+            await _userTaskRepository.CreateAsync(userTask);
+            return CreatedAtAction(nameof(GetById), new { id = userTask.Id }, userTask.ToUserTaskDto());
         }
 
         [HttpPost("{categoryId}")]
@@ -64,6 +87,7 @@ namespace api.controllers
             await _userTaskRepository.CreateAsync(userTask);
             return CreatedAtAction(nameof(GetById), new { id = userTask.Id }, userTask.ToUserTaskDto());
         }
+
 
         [HttpPut]
         [Route("{id}")]

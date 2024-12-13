@@ -10,6 +10,8 @@
         <th class="task-header-item">Task</th>
         <th class="task-header-item">Status</th>
         <th class="task-header-item">Action</th>
+        <th class="task-header-item">category</th>
+        <th></th>
       </tr>
 
       <!-- <ul> -->
@@ -38,12 +40,21 @@
             delete
           </button>
         </td>
+
+        <td class="task-content">
+          <p class="task-categoryName">{{ task.categoryName }}</p>
+        </td>
+
+        <td class="task-actions">
+          <button (click)="edit(task)">edit</button>
+        </td>
       </tr>
       <!-- </ul> -->
     </table>
   </div>
-
+  <app-edit-task *ngIf="showEdit" [task]="editingTask"></app-edit-task>
   <app-create-task-button
+    [categories]="categories"
     (sendTasksToParent)="updateTasksFromChild($event)"
   ></app-create-task-button>
 </div>

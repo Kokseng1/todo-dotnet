@@ -61,7 +61,7 @@ namespace api.Repository
 
         public async Task<UserTask?> GetByIdAsync(int id)
         {
-            return await _context.UserTasks.FirstOrDefaultAsync(i => i.Id == id);
+            return await _context.UserTasks.Include(ut => ut.Category).FirstOrDefaultAsync(i => i.Id == id);
         }
 
         public async Task<UserTask?> GetByStatusAsync(bool status)
@@ -76,7 +76,7 @@ namespace api.Repository
 
         public async Task<UserTask?> UpdateAsync(int id, UpdateUserTaskDto UserTaskDto)
         {
-            var existingUserTask = await _context.UserTasks.FirstOrDefaultAsync(x => x.Id == id);
+            var existingUserTask = await _context.UserTasks.Include(ut => ut.Category).FirstOrDefaultAsync(x => x.Id == id);
 
             if (existingUserTask == null)
                 {
@@ -86,7 +86,6 @@ namespace api.Repository
             existingUserTask.CategoryId = UserTaskDto.CategoryId;
             existingUserTask.name = UserTaskDto.name;
             existingUserTask.status = UserTaskDto.status;
-            existingUserTask.CreatedOn = UserTaskDto.CreatedOn;
             await _context.SaveChangesAsync();
 
             return existingUserTask;

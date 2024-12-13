@@ -59,6 +59,12 @@ namespace api.Repository
             await _context.SaveChangesAsync();
 
             return existingCategory;
-        }    
+        }     
+        
+        public async Task<Category?> GetByNameAsync(string name) {
+             return await _context.Categories.FirstOrDefaultAsync(c => c.Name == name); 
+        }
     }
+
+   
 }

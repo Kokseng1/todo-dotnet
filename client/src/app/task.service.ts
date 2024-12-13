@@ -13,23 +13,31 @@ export interface Task {
   providedIn: 'root',
 })
 export class TaskService {
-  private apiURL = 'http://localhost:5194/api/UserTask';
+  private taskApiURL = 'http://localhost:5194/api/UserTask';
+  private categoryApiURL = 'http://localhost:5194/api/Category';
 
   constructor(private http: HttpClient) {}
 
   getAllTasks(): Observable<any> {
-    return this.http.get(`${this.apiURL}`);
+    return this.http.get(`${this.taskApiURL}`);
   }
 
   updateTaskStatus(task: Task): Observable<any> {
-    return this.http.put(`${this.apiURL}/${task.id}`, task);
+    return this.http.put(`${this.taskApiURL}/${task.id}`, task);
   }
 
   deleteTask(id: any) {
-    return this.http.delete(`${this.apiURL}/${id}`);
+    return this.http.delete(`${this.taskApiURL}/${id}`);
   }
 
-  createTask(name: string) {
-    return this.http.post(`${this.apiURL}/add`, { name: name, status: false });
+  createTask(taskName: string, categoryName: string) {
+    return this.http.post(`${this.taskApiURL}`, {
+      name: taskName,
+      categoryName: categoryName,
+    });
+  }
+
+  getAllCategories(): Observable<any> {
+    return this.http.get(`${this.categoryApiURL}`);
   }
 }

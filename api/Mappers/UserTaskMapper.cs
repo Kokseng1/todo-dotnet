@@ -10,11 +10,15 @@ namespace api.Mappers
     public static class UserTaskMapper
     {
         public static UserTaskDto ToUserTaskDto(this UserTask userTask) {
+            // Console.WriteLine("cate : " + userTask.Category);
+            // Console.WriteLine("name : " + userTask.Category.Name);
+
             return new UserTaskDto {
                 Id = userTask.Id,
                 CategoryId = userTask.CategoryId,
                 name = userTask.name,
-                status = userTask.status
+                status = userTask.status,
+                categoryName = userTask.Category.Name
             };
         }
 

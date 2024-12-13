@@ -13,8 +13,9 @@ namespace api.Dto.UserTask
         [MinLength(1, ErrorMessage = "name must not be empty")]
         public string name {get; set;} = string.Empty;
         public DateTime CreatedOn {get; set;} = DateTime.Now;
-        [Required]
 
         public Boolean status {get; set;} = false;
+
+        public String categoryName {get; set;} = "";
     }
 }
